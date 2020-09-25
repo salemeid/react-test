@@ -3,15 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      meaningOfLife: 47
+      meaningOfLife: 47 + this.props.incr
     }
   }
 
   handleClick = () => {
-    this.setState({meaningOfLife:this.state.meaningOfLife + 1})
+    this.setState((prevState,prevProps) => {
+      return {meaningOfLife:prevState.meaningOfLife + prevProps.incr}
+    },
+      () => console.log(this.state.meaningOfLife)
+      )
 
   }
   render() {
@@ -22,6 +26,7 @@ class App extends React.Component {
           <p>
             {this.state.meaningOfLife}
           </p>
+          <h1>this is a test react</h1>
           <button onClick = {this.handleClick}>
             Click Me!
           </button>
